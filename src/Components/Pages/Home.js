@@ -14,22 +14,22 @@ const Home = () => {
   return (
     <>
       <div
-        className=" bg-no-repeat bg-cover text-white"
+        className=" bg-no-repeat bg-cover text-white text-center	"
         style={{
-          height: "90vh",
+          height: "100vh",
           width: "100%",
           "background-image":
             "url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80'",
         }}
       >
         <div className="w-7/12 m-auto">
-          <h1 className="text-5xl pt-40 pb-4 font-bold">Developer Connector</h1>
-          <h4 className="text-xl">
+          <h1 className="text-5xl pt-60 pb-4 font-bold">Developer Connector</h1>
+          <h4 className="text-xl mb-6">
             Create a developer profile/portfolio, share posts and get help from
             other developers.
           </h4>
-          <Button onclick={signUpHandler} className="" title="Sign Up" />
-          <Button onclick={signInHandler} className="" title="Login" />
+          <Button onClick={signUpHandler} title="Sign Up" />
+          <Button onClick={signInHandler} title="Login" />
         </div>
       </div>
     </>
