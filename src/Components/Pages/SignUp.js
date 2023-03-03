@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import Button from "../UI/Button";
 import InputField from "../UI/InputField";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { signUpAction } from "../../redux/actions/auth.actions";
+import { useDispatch } from "react-redux";
+// import { AuthTypes } from "../../redux/type/auth.type";
+
 const SignUp = (props) => {
   const [signInInput, setSignInInput] = useState({
     enteredName: "",
@@ -9,7 +13,9 @@ const SignUp = (props) => {
     enteredPass: "",
     enteredConfirmPass: "",
   });
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  // const userSession = useSelector((state) => state.SignUpReducer.userSession);
   const onSubmit = (e) => {
     if (!signInInput.enteredName.trim()) {
       alert("Please enter name!");
@@ -23,7 +29,8 @@ const SignUp = (props) => {
     } else if (signInInput.enteredPass !== signInInput.enteredConfirmPass) {
       alert("Password don't match");
     }
-    console.log(signInInput);
+
+    dispatch(signUpAction(signInInput));
   };
 
   const onChangeHandler = (e) => {
@@ -69,7 +76,9 @@ const SignUp = (props) => {
         />
         <br />
         <br />
-        <Button onClick={onSubmit} title="Register" />
+        <Link to="/signin">
+          <Button onClick={onSubmit} title="Register" />
+        </Link>
         <p className="mt-4">
           Already have an account?
           <Link to="/signin" className="text-blue-700 text-sm">

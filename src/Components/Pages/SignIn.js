@@ -1,19 +1,32 @@
 import React, { useState } from "react";
 import Button from "../UI/Button";
 import InputField from "../UI/InputField";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loginAction } from "../../redux/actions/auth.actions";
 const SignIn = () => {
-  const [loginInput, setLoginInput] = useState({
-    loginEmail: "",
-    loginPass: "",
-  });
+  const [loginInput, setLoginInput] = useState([
+    {
+      loginEmail: "",
+      loginPass: "",
+    },
+  ]);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const userData = useSelector((state) => state.SignUpReducer.userSession);
+  const AuthValid = useSelector((state) => state.AuthReducer.loginData);
+  console.log("signIn", userData);
   const loginChangeHandler = (e) => {
     setLoginInput((prevState) => {
       return { ...prevState, [e.target.name]: e.target.value };
     });
   };
   const onLogin = () => {
-    console.log(loginInput);
+    {
+      AuthValid.length > 0 ? navigate("/dashboard") : navigate("/signin");
+    }
+    dispatch(loginAction(userData, loginInput));
   };
   return (
     <div className="flex bg-gradient-to-r from-slate-200 to-gray-800">
